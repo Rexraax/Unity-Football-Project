@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject particleEffect;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    
+
+    void OnCollisionEnter(Collision collision)
     {
-        
+        if(collision.gameObject.CompareTag("Ball"))
+        {
+            Instantiate(particleEffect, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 }

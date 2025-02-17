@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    // public GameObject ballParticleEffect;
     private Rigidbody Rb;
     public float speed = 5f; // Speed of movement
 
@@ -20,6 +21,7 @@ public class Ball : MonoBehaviour
             if (touch.phase == TouchPhase.Began) // Detect touch start
             {
                 MoveForward();
+                // Instantiate(ballParticleEffect, transform.position,Quaternion.identity);
             }
         }
     }
