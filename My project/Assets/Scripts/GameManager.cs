@@ -1,42 +1,36 @@
-// using UnityEngine;
-// using UnityEngine.UI;
+using UnityEngine;
+using UnityEngine.UI;
 
-// public class GameManager : MonoBehaviour
-// {
-//     public GameObject gameCompletePanel;  // Assign from Inspector
-//     public GameObject gameOverPanel;      // Assign from Inspector
-//     private Enemy[] enemies;
+public class GameManager : MonoBehaviour
+{
+    public GameObject gameCompletePanel;  // Assign from Inspector
+    private int enemyCount;
 
-//     void Start()
-//     {
-//         gameCompletePanel.SetActive(false);
-//         gameOverPanel.SetActive(false);
-//         UpdateEnemyList();
-//     }
+    private void Start()
+    {
+        CountEnemy();
+    }
 
-//     void Update()
-//     {
-//         CheckGameComplete();
-//     }
+    private void CountEnemy()
+    {
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+    }
 
-//     // Check if all enemies are destroyed
-//     void CheckGameComplete()
-//     {
-//         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
-//         {
-//             ShowGameComplete();
-//         }
-//     }
+    public void EnemyDestroyed()
+    {
+        enemyCount--;
+        Debug.Log("Remaining Enemy: " + enemyCount);
+        
+        if (enemyCount <= 0)  // Ensure safety check for negative values
+        {
+            GameComplete();
+        }
+    }
 
-//     public void ShowGameComplete()
-//     {
-//         gameCompletePanel.SetActive(true);
-//         Time.timeScale = 0f; // Pause game
-//     }
-
-//     public void ShowGameOver()
-//     {
-//         gameOverPanel.SetActive(true);
-//         Time.timeScale = 0f; // Pause game
-//     }
-// }
+    private void GameComplete()
+    {
+        Debug.Log("Game Complete!");
+        Time.timeScale = 0f;
+        gameCompletePanel.SetActive(true);
+    }
+}
