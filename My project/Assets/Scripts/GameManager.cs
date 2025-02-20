@@ -23,8 +23,11 @@ public class GameManager : MonoBehaviour
         levelComplete.SetActive(true);
         Time.timeScale = 0f;
 
-        int nextLevel = SceneManager.GetActiveScene().buildIndex + 1;
-        PlayerPrefs.SetInt("LastLevel", nextLevel);
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        int nextLevel = currentLevel + 1;
+
+        // Save last played level
+        PlayerPrefs.SetInt("LastPlayedLevel", nextLevel);
         PlayerPrefs.Save();
     }
 
@@ -32,7 +35,15 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        SceneManager.LoadScene(nextSceneIndex);
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.Log("No more levels available");
+        }
     }
 
     public void LoadMenu()
@@ -40,12 +51,4 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
-
-    public void PlayGame()
-    {
-        int lastLevel = PlayerPrefs.GetInt("LastLevel", 1);
-        SceneManager.LoadScene(lastLevel);
-    }
-
-    
 }

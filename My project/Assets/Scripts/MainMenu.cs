@@ -4,21 +4,21 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public Button playButton;  // Assign in Inspector
-    public Button soundButton; // Assign in Inspector
-    public AudioSource backgroundMusic; // Assign AudioSource in Inspector
-    public Image soundButtonImage; // Assign Image component of Sound button in Inspector
-    public Sprite soundOnSprite; // Assign "Sound On" sprite in Inspector
-    public Sprite soundOffSprite; // Assign "Sound Off" sprite in Inspector
+    public Button playButton;
+    public Button soundButton;
+    public AudioSource backgroundMusic;
+    public Image soundButtonImage;
+    public Sprite soundOnSprite;
+    public Sprite soundOffSprite;
 
     private bool isSoundOn;
 
     void Start()
     {
-        // Load the last played level, defaulting to level 1
+        // Load the last played level (default to 1 if not set)
         int lastLevel = PlayerPrefs.GetInt("LastPlayedLevel", 1);
 
-        // Ensure we don't go beyond available scenes
+        // Ensure we don't load a non-existing scene
         if (lastLevel >= SceneManager.sceneCountInBuildSettings)
         {
             lastLevel = 1; // Reset to Level 1 if out of bounds
@@ -28,10 +28,9 @@ public class MainMenu : MonoBehaviour
         playButton.onClick.AddListener(() => LoadLevel(lastLevel));
 
         // Load sound settings
-        isSoundOn = PlayerPrefs.GetInt("SoundOn", 1) == 1; // Default to ON
+        isSoundOn = PlayerPrefs.GetInt("SoundOn", 1) == 1;
         UpdateSoundState();
 
-        // Assign Sound Button functionality
         soundButton.onClick.AddListener(ToggleSound);
     }
 
@@ -55,7 +54,6 @@ public class MainMenu : MonoBehaviour
             backgroundMusic.mute = !isSoundOn;
         }
 
-        // Update sound button sprite
         if (soundButtonImage != null)
         {
             soundButtonImage.sprite = isSoundOn ? soundOnSprite : soundOffSprite;
