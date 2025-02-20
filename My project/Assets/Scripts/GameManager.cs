@@ -1,36 +1,49 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject gameCompletePanel;  // Assign from Inspector
-    private int enemyCount;
-
-    private void Start()
+    public GameObject levelComplete;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        CountEnemy();
+        levelComplete.SetActive(false);
     }
 
-    private void CountEnemy()
+    // Update is called once per frame
+    void Update()
     {
-        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-    }
-
-    public void EnemyDestroyed()
-    {
-        enemyCount--;
-        Debug.Log("Remaining Enemy: " + enemyCount);
-        
-        if (enemyCount <= 0)  // Ensure safety check for negative values
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            GameComplete();
+            LevelComplete();
         }
+        
     }
-
-    private void GameComplete()
+    private void LevelComplete()
     {
-        Debug.Log("Game Complete!");
+        levelComplete.SetActive(true);
         Time.timeScale = 0f;
-        gameCompletePanel.SetActive(true);
     }
-}
+    
+    public void LoadNextLevel()
+    {
+        Time.timeScale = 1f;
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+        Debug.Log("No more levels available");
+        }
+
+    }
+    public void LoadMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+    }
+    }
+    

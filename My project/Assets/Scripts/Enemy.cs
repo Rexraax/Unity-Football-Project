@@ -15,12 +15,5 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void OnDestroy()
-    {
-        GameManager gameManager = FindObjectOfType<GameManager>();
-        if (gameManager != null)
-        {
-            gameManager.EnemyDestroyed();
-        }
-    }
+    
 }
