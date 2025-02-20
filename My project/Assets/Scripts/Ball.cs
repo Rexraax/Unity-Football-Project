@@ -22,6 +22,7 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
         audioSource = GetComponent<AudioSource>();
         Rb = GetComponent<Rigidbody>();
 
