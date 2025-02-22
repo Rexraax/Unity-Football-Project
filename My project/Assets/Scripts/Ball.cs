@@ -1,6 +1,4 @@
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEditor.SceneManagement;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
@@ -102,23 +100,22 @@ public class Ball : MonoBehaviour
         {
             audioSource.PlayOneShot(boomSound);
         }
-        else if(collision.gameObject.CompareTag("Wall"))
-        { 
-            
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
             gameOver.SetActive(true);
             Time.timeScale = 0;
         }
     }
+
     public void RetryGame()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
     }
-     public void LoadMenu()
+
+    public void LoadMenu()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
-
     }
 }
