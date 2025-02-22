@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
@@ -16,13 +15,15 @@ public class Ball : MonoBehaviour
     public LineRenderer lineRenderer; // Line Renderer for dragging line
     public float lineMultiplier = 0.05f; // Adjust line length
 
-    public GameObject gameOver;
+    private GameManager gameManager;
 
     void Start()
     {
         Time.timeScale = 1f;
         audioSource = GetComponent<AudioSource>();
         Rb = GetComponent<Rigidbody>();
+
+        gameManager = FindFirstObjectByType<GameManager>(); // Get reference to GameManager
 
         if (lineRenderer == null)
         {
@@ -102,12 +103,12 @@ public class Ball : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Wall"))
         {
-            gameOver.SetActive(true);
-            Time.timeScale = 0;
+            Destroy(gameObject);
+            // Tell GameManager to handle game over
+            gameManager.TriggerGameOver();
         }
     }
-
-    public void RetryGame()
+     public void RetryGame()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

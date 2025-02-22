@@ -4,10 +4,19 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject levelComplete;
+    public GameObject adPanel;
+    public GameObject gameOverPanel;
+    public RewardedAdManager rewardedAdManager;
+    public GameObject ballPrefab;  // Ball prefab for spawning
+    public Transform spawnPoint;   // Spawn position for new ball
+
+    private bool hasUsedExtraChance = false; // Prevent multiple revives
 
     void Start()
     {
         levelComplete.SetActive(false);
+        adPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
     }
 
     void Update()
@@ -22,13 +31,78 @@ public class GameManager : MonoBehaviour
     {
         levelComplete.SetActive(true);
         Time.timeScale = 0f;
+        Debug.Log("Level Completed!");
+    }
 
-        int currentLevel = SceneManager.GetActiveScene().buildIndex;
-        int nextLevel = currentLevel + 1;
+    public void CheckGameOver()
+    {
+        if (!hasUsedExtraChance) 
+        {
+            ShowAdPanel();  // Show ad panel first
+        }
+        else
+        {
+            ShowGameOver(); // If extra chance is used, go directly to game over
+        }
+    }
 
-        // Save last played level
-        PlayerPrefs.SetInt("LastPlayedLevel", nextLevel);
-        PlayerPrefs.Save();
+    private void ShowAdPanel()
+    {
+        Time.timeScale = 0f;
+        adPanel.SetActive(true);
+    }
+
+    public void WatchAd()
+    {
+        adPanel.SetActive(false);
+        rewardedAdManager.ShowRewardedAd();
+    }
+
+    public void RevivePlayer() // This fixes the error!
+    {
+        hasUsedExtraChance = true;
+        Time.timeScale = 1f;
+        Debug.Log("Player gets one more chance!");
+
+        RespawnPlayer(); // Respawn the player
+        SpawnNewBall(); // Spawn new ball
+    }
+
+    public void NoThanks()
+    {
+        adPanel.SetActive(false);
+        ShowGameOver();
+    }
+
+    public void ShowGameOver()
+    {
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    private void RespawnPlayer()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            player.transform.position = new Vector3(0, 1, 0);
+        }
+
+        Debug.Log("Player respawned.");
+    }
+
+    private void SpawnNewBall()
+    {
+        if (ballPrefab != null && spawnPoint != null)
+        {
+            Instantiate(ballPrefab, spawnPoint.position, Quaternion.identity);
+            Debug.Log("New ball spawned.");
+        }
+        else
+        {
+            Debug.LogWarning("Ball prefab or spawn point is not set!");
+        }
     }
 
     public void LoadNextLevel()
@@ -50,5 +124,15 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+    }
+
+    public void TriggerGameOver()
+    {
+        CheckGameOver(); // Instead of showing game over immediately, check for an ad chance
+    }
+     public void RetryGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
