@@ -1,0 +1,19 @@
+# ninja log v5
+117	17527	7619831046748229	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2a42737fb426c8e2
+19701	20130	7619831073399548	C:/Users/vs/Desktop/FootBall Project/Unity-Football-Project/My project/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/726q356f/obj/arm64-v8a/libgame.so	e4f0504624be03c1
+103	17617	7619831046371107	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	6aaaebb2c35e1b27
+156	18173	7619831053323033	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	9b1fd9accd0def69
+89	17701	7619831048590240	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	4ec737f0c84eed72
+75	18223	7619831053723683	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	3d7fa166a280d7a
+145	17753	7619831049095525	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	296294e0908afd23
+131	19271	7619831064453713	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	7d25a1a88a87553f
+2	19700	7619831068917456	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	1fe72b2c14595f07
+97	9298	7620003203670176	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	6aaaebb2c35e1b27
+66	9341	7620003204366931	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	4ec737f0c84eed72
+143	9487	7620003204783873	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	296294e0908afd23
+45	9494	7620003203721246	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2a42737fb426c8e2
+82	9718	7620003208743455	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	3d7fa166a280d7a
+159	9812	7620003209763434	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	9b1fd9accd0def69
+127	10804	7620003219927683	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	7d25a1a88a87553f
+29	11467	7620003225952722	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	1fe72b2c14595f07
+11468	12304	7620003234527505	C:/Users/vs/Desktop/FootBall Project/Unity-Football-Project/My project/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/726q356f/obj/arm64-v8a/libgame.so	e4f0504624be03c1
