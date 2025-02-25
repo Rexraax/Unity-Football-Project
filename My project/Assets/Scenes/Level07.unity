@@ -928,7 +928,7 @@ MonoBehaviour:
   adPanel: {fileID: 1234631552}
   gameOverPanel: {fileID: 750453857}
   rewardedAdManager: {fileID: 1612826866}
-  ballPrefab: {fileID: 4953144198316250449, guid: 7efc589ca8fad324a97dd5a1cdb96e22, type: 3}
+  ballPrefab: {fileID: 2791204927128614745, guid: 1e4a6ea54a5e5e1428d8572d798b835d, type: 3}
   spawnPoint: {fileID: 745924890}
 --- !u!4 &346319365
 Transform:

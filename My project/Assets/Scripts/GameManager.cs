@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
         levelComplete.SetActive(false);
         adPanel.SetActive(false);
         gameOverPanel.SetActive(false);
+
+        // Save the last played level when the scene starts
+        PlayerPrefs.SetInt("LastPlayedLevel", SceneManager.GetActiveScene().buildIndex);
+        PlayerPrefs.Save();
+        Debug.Log("Saved Last Played Level: " + SceneManager.GetActiveScene().buildIndex);
     }
 
     void Update()
@@ -58,14 +63,14 @@ public class GameManager : MonoBehaviour
         rewardedAdManager.ShowRewardedAd();
     }
 
-    public void RevivePlayer() // This fixes the error!
+    public void RevivePlayer()
     {
         hasUsedExtraChance = true;
         Time.timeScale = 1f;
         Debug.Log("Player gets one more chance!");
 
-        RespawnPlayer(); // Respawn the player
-        SpawnNewBall(); // Spawn new ball
+        RespawnPlayer();
+        SpawnNewBall();
     }
 
     public void NoThanks()
@@ -130,7 +135,8 @@ public class GameManager : MonoBehaviour
     {
         CheckGameOver(); // Instead of showing game over immediately, check for an ad chance
     }
-     public void RetryGame()
+    
+    public void RetryGame()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
